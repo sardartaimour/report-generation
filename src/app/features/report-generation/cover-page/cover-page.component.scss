@@ -1,0 +1,23 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
+.bg-primary {
+    @apply bg-blue-900;
+}
+
+.text-primary {
+    @apply text-blue-900;
+}
+
+@media (max-width: 768px) {
+    .client-logo {
+        width: 80px;
+        height: 80px;
+    }
+
+    .project-image {
+        height: 48px;
+    }
+}

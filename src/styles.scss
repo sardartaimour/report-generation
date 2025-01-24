@@ -1,1 +1,92 @@
 /* You can add global styles to this file, and also import other style files */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%
+}
+
+body {
+    font-family: 'Lexend', sans-serif;
+}
+
+.report-container {
+    border: 1px solid #88c9f9; // Light blue border
+    padding: 2rem;
+    background-color: #f9fbfd; // Light background
+    color: #003366; // Primary color for text
+}
+
+.report-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #003366; // Primary color
+}
+
+.subtitle {
+    color: #88c9f9; // Secondary color
+    font-weight: 600;
+}
+
+.a4-cover-page {
+    width: 210mm; /* A4 width in mm */
+    height: 297mm; /* A4 height in mm */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertical centering */
+    align-items: center; /* Horizontal centering */
+}
+
+.a4-page {
+    // width: 210mm; /* A4 width in mm */
+    // height: 297mm; /* A4 height in mm */
+    margin: 0 auto;
+    background: #fff;
+    // border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Ensure no overflow issues */
+    page-break-after: always; /* Force page break after cover */
+}
+
+.container {
+    border-radius: 20px;
+    border: 1px solid #00476D;
+}
+.e-flex {
+    flex: 1;
+}
+
+.excellent {
+    background-color: #0BC83433;
+}
+
+.warning {
+    background-color: #FF7B0080;
+}
+
+.netural {
+    background-color: #00476D33;
+}
+
+.bg-img {
+    // background-image: url('/images/watermark.jpg');
+    // background-size: cover; /* Adjust size to fit */
+    // background-repeat: no-repeat;
+    // background-position: center;
+    // width: 100%;
+    // height: 100%;
+
+    // position: relative;
+    // width: 100%;
+    // height: 100vh; /* Ensure it covers the full page height */
+    // background-size: cover; /* Adjust size to fit the container */
+    // background-repeat: no-repeat; /* Avoid repeating */
+    // background-position: center center; /* Center the image */
+    // background-image: url('/images/watermark.jpg');
+}

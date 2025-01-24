@@ -1,0 +1,58 @@
+<div class="a4-cover-page a4-page flex flex-col items-center justify-center bg-gray-100 p-4">
+    <!-- Outer Container -->
+    <div class="overflow-hidden w-full p-24 gap-y-2 flex justify-center items-center flex-wrap" style="flex: 1">
+        <!-- Header -->
+        <div class="flex justify-center items-center w-full">
+            <!-- Logo Section -->
+            <div class="flex items-center gap-2">
+                <img src="images/logo.png" alt="ORKER Logo" class="h-48" />
+            </div>
+
+            @if (coverPage().client_logo_url) {
+                <div class="border-l h-20 border-gray-300"></div>
+
+                <!-- Client Logo Section -->
+                <div class="flex items-center">
+                    <img [src]="coverPage().client_logo_url" alt="Client Logo" class="h-48" />
+                </div>
+            }
+
+        </div>
+
+        <!-- Image Section -->
+        <div class="flex justify-center items-center w-full">
+            <img [src]="coverPage().project_profile_url" [alt]="coverPage().project_title" 
+                class="w-full rounded-[24px] object-cover h-64" />
+        </div>
+
+        <!-- Project Details -->
+        <div class="flex justify-space-between items-center flex-wrap mt-2 w-full">
+            <h2 class="font-bold text-gray-800 w-full text-[18px]" [class.text-center]="!coverPage().project_details">{{coverPage().project_title}}</h2>
+            @if (coverPage().project_details) {
+                <div class="flex justify-space-between items-center flex-wrap w-full text-sm">
+
+                    <div class="w-full flex justify-space-between">
+                        <div class="w-[50%] text-[14px] font-medium">Architect:</div> 
+                        <div class="text-right w-[50%] text-[14px] font-medium">{{coverPage().project_details?.Architect}}</div>
+                    </div>
+
+                    <div class="w-full flex justify-space-between">
+                        <div class="w-[50%] text-[14px] font-medium">Start Date:</div>
+                        <div class="text-right w-[50%] text-[14px] font-medium">{{coverPage().project_details?.['Start Date']}}</div>
+                    </div>
+
+                    <div class="w-full flex justify-space-between">
+                        <div class="w-[50%] text-[14px] font-medium">Est Duration:</div>
+                        <div class="text-right w-[50%] text-[14px] font-medium">{{coverPage().project_details?.['Est Duration']}}</div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center py-4 w-full">
+            <h3 class="text-[32px] font-extrabold">{{coverPage().report_title}}</h3>
+            <p class="text-[20px] font-medium">{{coverPage().report_subtitle}}</p>
+        </div>
+    </div>
+</div>
