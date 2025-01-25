@@ -2,15 +2,15 @@
 <main class="p-6 flex flex-col gap-8" #printsection id="print-section">
 	<!-- <app-report /> -->
 
-	<div id="cover-section" class="bg-img w-full">
+	<div id="cover-section" class="w-full">
 		<app-cover-page [coverPage]="report.cover_page" />
 	</div>
 
-	<div id="content-section-summary" class="bg-img w-full">
+	<div id="content-section-summary" class="w-full">
 		<app-summary-page [summaryPage]="report.summary_page" />
 	</div>
 
-	<div id="content-section-work" class="bg-img w-full">
+	<div id="content-section-work" class="w-full">
 		<app-work-progress-summary [workProgressSummary]="workProgress" />
 	</div>
 </main>

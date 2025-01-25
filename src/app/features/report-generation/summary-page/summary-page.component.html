@@ -1,6 +1,7 @@
 <div class="a4-page flex flex-col items-stretch justify-start bg-gray-100 p-[36px] gap-4">
 
-    <div class="w-full">
+    <img src="images/watermark.jpg" height="100%" width="100%" class="bg-img" />
+    <div class="w-full" style="z-index: 10000;">
         <div class="flex items-center justify-between">
 
             <div class="flex justify-start items-center w-full gap-4" style="flex: 1">
@@ -54,15 +55,15 @@
     </div>
 
     @for (section of summaryPage().sections; track section.section_title) {
-        <h3 class="text-[14px] font-bold">{{section.section_title}}</h3>
+        <h3 class="text-[14px] font-bold" style="z-index: 10000;">{{section.section_title}}</h3>
 
         <!-- start note -->
         @if (section.start_note) {
-            <p class="w-fit banner flex items-center e-flex">Note: {{section.start_note}}</p>
+            <p class="w-fit banner flex items-center e-flex" style="z-index: 10000;">Note: {{section.start_note}}</p>
         }
 
         <!-- middle sections -->
-        <div class="flex flex-wrap gap-[12px]">
+        <div class="flex flex-wrap gap-[12px]" style="z-index: 10000;">
             @for (sub_section of section?.subsections; track sub_section?.view) {
                 @if (sub_section?.view === "attendance_summary") {
                     <app-attendance-summary 
@@ -92,7 +93,7 @@
 
         <!-- end note -->
         @if (section.end_note) {
-            <div class="w-fit banner flex items-center e-flex">Note: {{section.end_note}}</div>
+            <div class="w-fit banner flex items-center e-flex" style="z-index: 10000;">Note: {{section.end_note}}</div>
         }
 
     }
