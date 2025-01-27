@@ -1,50 +1,52 @@
-<div class="a4-page flex flex-col items-stretch justify-start bg-gray-100 p-[36px] gap-4">
-    <img src="images/watermark.jpg" height="100%" width="100%" class="bg-img" />
+<div class="page-border a4-page flex flex-col items-stretch justify-start py-[48px]">
 
-    <h3 class="text-[14px] font-bold" style="z-index: 10000;">{{workProgressSummary().section_title}}</h3>
+    <div class="background-container flex flex-col items-stretch justify-start gap-4 px-[48px] e-flex">
+    
+        <h3 class="text-[18px] font-bold content-area text-[#00263A]">{{workProgressSummary().section_title}}</h3>
 
-    <!-- start note -->
-    @if (workProgressSummary().start_note) {
-    <div class="w-fit banner flex items-center e-flex" style="z-index: 10000;">Note: {{workProgressSummary().start_note}}</div>
-    }
+        <!-- start note -->
+        @if (workProgressSummary().start_note) {
+        <div class="w-fit banner flex items-center e-flex content-area text-[#000000]">Note: {{workProgressSummary().start_note}}</div>
+        }
 
-    <!-- middle sections -->
-    <div class="flex flex-wrap gap-[12px]" style="z-index: 10000;">
-        @for (sub_section of workProgressSummary()?.subsections; track sub_section?.view) {
-            @if (sub_section?.view === "work_progress_summary") {
+        <!-- middle sections -->
+        <div class="flex flex-wrap gap-[12px] content-area">
+            @for (sub_section of workProgressSummary()?.subsections; track sub_section?.view) {
+                @if (sub_section?.view === "work_progress_summary") {
 
-                <div class="container border border-gray-300 rounded-lg shadow-md min-w-[350px] p-[10px]">
-                    <div>
+                    <div class="container border border-gray-300 rounded-lg shadow-md min-w-[350px] p-[10px]">
+                        <div>
 
-                        @for (work of sub_section?.view_content?.works; track work.work_name) {
-                            <div class="flex flex-col gap-1 mb-2">
-                                <div class="flex flex-row gap-2 items-center">
-                                    <div class="text-[10px] font-semibold text-gray-800">
-                                        {{work?.work_name}}
+                            @for (work of sub_section?.view_content?.works; track work.work_name) {
+                                <div class="flex flex-col gap-1 mb-2">
+                                    <div class="flex flex-row gap-2 items-center">
+                                        <div class="text-[16px] font-semibold text-[#000000]">
+                                            {{work?.work_name}}
+                                        </div>
+                                        
+                                        <p 
+                                            class="bg-[#00476D1A] text-[14px] font-light rounded-full text-[10px] font-semibold px-3 py-1 banner flex items-center content-area text-[#000000]"
+                                            [ngClass]="work?.color_theme?.toLowerCase()">{{work?.work_status}}</p>
                                     </div>
-                                    
-                                    <p 
-                                        class="bg-[#00476D1A] text-[10px] text-gray- font-light rounded-full  text-[10px] font-semibold px-3 py-1 text-alig"
-                                        [ngClass]="work?.color_theme?.toLowerCase()">{{work?.work_status}}</p>
+                    
+                                    @if (work?.comment) {
+                                        <div 
+                                            class="flex bg-[#00476D1A] text-[#000000] text-[14px] font-semibold p-[4px] rounded-[4px] text-alig"
+                                        >
+                                        <p class="text-[#00263A]">{{work?.comment}}</p>
+                                    </div>
+                                    }
                                 </div>
-                
-                                @if (work?.comment) {
-                                    <div 
-                                        class="flex bg-[#00476D1A] text-gray-700 text-[10px] font-semibold p-[4px] rounded-[4px] text-alig"
-                                    >
-                                    <p>{{work?.comment}}</p>
-                                </div>
-                                }
-                            </div>
-                        }
+                            }
+                        </div>
                     </div>
-                </div>
+                }
             }
+        </div>
+
+        <!-- end note -->
+        @if (workProgressSummary().end_note) {
+        <div class="w-fit banner flex items-center e-flex content-area text-[#000000]">Note: {{workProgressSummary().end_note}}</div>
         }
     </div>
-
-    <!-- end note -->
-    @if (workProgressSummary().end_note) {
-    <div class="w-fit banner flex items-center e-flex" style="z-index: 10000;">Note: {{workProgressSummary().end_note}}</div>
-    }
 </div>

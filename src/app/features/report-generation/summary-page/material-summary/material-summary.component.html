@@ -1,22 +1,22 @@
 <div class="container border border-gray-300 rounded-lg shadow-md min-w-[350px] p-[10px]">
-	<h3 class="text-[12px] font-semibold text-gray-800 mb-2">{{title()}}</h3>
+	<h3 class="text-[18px] font-semibold text-[#000000] mb-2">{{title()}}</h3>
 
 	<div>
 		<!-- Visitor Item 1 -->
 		@for (summary of materialSummary(); track summary.material_name) {
 			<div class="flex justify-between items-center mb-2">
 				<div>
-					<p class="text-[10px] font-semibold text-gray-800">
+					<p class="text-[16px] font-medium text-[#000000]">
 						{{summary?.material_name}}
 					</p>
 					
 					@if (summary?.material_date) {
-                        <p class="text-[8px] text-gray- font-light">{{summary?.material_date}}</p>
+                        <p class="text-[14px] text-[#000000] font-light">{{summary?.material_date}}</p>
                     }
 				</div>
 
 				<div class="flex">
-					<div class="bg-[#00476D1A] text-gray-700 text-[10px] font-semibold px-3 py-1 rounded-full"
+					<div class="bg-[#00476D1A] text-[#000000] text-[14px] font-semibold px-3 py-1 rounded-full"
                         [class.bg-[#FF7B0080]]="summary?.color_theme === 'Warning'"
                         [class.bg-[#E1080859]]="summary?.color_theme === 'Critical'">
 						{{summary?.availability_status}}

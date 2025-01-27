@@ -388,143 +388,145 @@ export class AppComponent {
   //         });
   // }
 
-  // onGenerateReport(): void {
-  //     const coverElement = document.getElementById('cover-section'); // Cover page element
-  //     const contentElement = document.getElementById('content-section-summary'); // Summary content page
-  //     const workSummaryContentElement = document.getElementById('content-section-work'); // Work summary page
-
-  //     const pdfWidth = 794; // A4 width in pixels
-  //     const pdfHeight = 1123; // A4 height in pixels
-  //     const margin = 15; // Margin for PDF content
-
-  // 	const createCoverPage = (
-  //         element: HTMLElement | null,
-  //         pdf: jsPDF,
-  //         addPage: boolean = false
-  //     ): Promise<void> => {
-  //         return new Promise((resolve, reject) => {
-  //             if (!element) return resolve(); // Skip if the element is null
-
-  //             html2canvas(element, {
-  //                 scale: 2,
-  //                 useCORS: true, // To load external fonts and images
-  //             })
-  //                 .then((canvas) => {
-  //                     const imgData = canvas.toDataURL('image/jpeg', 1.0);
-  //                     const canvasWidth = canvas.width;
-  //                     const canvasHeight = canvas.height;
-
-  // 					 // Scale to fit PDF page size
-  // 					 const scaleFactor = Math.min(
-  // 						pdfWidth / canvasWidth,
-  // 						pdfHeight / canvasHeight
-  // 					);
-
-  // 					const centeredX = (pdfWidth - canvasWidth * scaleFactor) / 2; // Horizontal centering
-  //                 	const centeredY = (pdfHeight - canvasHeight * scaleFactor) / 2; // Vertical centering
-
-  // 					pdf.addImage(
-  // 						imgData,
-  // 						'JPEG',
-  // 						centeredX,
-  // 						centeredY,
-  // 						canvasWidth * scaleFactor,
-  // 						canvasHeight * scaleFactor
-  // 					);
-
-  //                     resolve();
-  //                 })
-  //                 .catch(reject);
-  //         });
-  //     };
-
-  //     // Function to create a PDF page for a given element
-  //     const createRestOfContentPage = (
-  //         element: HTMLElement | null,
-  //         pdf: jsPDF,
-  //         addPage: boolean = false
-  //     ): Promise<void> => {
-  //         return new Promise((resolve, reject) => {
-  //             if (!element) return resolve(); // Skip if the element is null
-
-  //             html2canvas(element, {
-  //                 scale: 2,
-  //                 useCORS: true, // To load external fonts and images
-  //             })
-  //                 .then((canvas) => {
-  //                     const imgData = canvas.toDataURL('image/jpeg', 1.0);
-  //                     const canvasWidth = canvas.width;
-  //                     const canvasHeight = canvas.height;
-
-  //                     // Calculate scaling to fit PDF dimensions
-  //                     const scaleFactor = pdfWidth / canvasWidth;
-  //                     const scaledHeight = canvasHeight * scaleFactor;
-
-  //                     const padding = 24; // Padding in px
-  //                     const pageHeightAvailable = pdfHeight - 2 * padding; // Available height on each page (excluding padding)
-
-  //                     let yOffset = padding; // Initial Y offset for the first page
-
-  //                     // Split content into multiple pages if necessary
-  //                     let remainingHeight = scaledHeight;
-  //                     while (remainingHeight > 0) {
-  //                         if (addPage) pdf.addPage(); // Add a new page if needed
-
-  //                         const heightToAdd =
-  //                             remainingHeight > pageHeightAvailable
-  //                                 ? pageHeightAvailable
-  //                                 : remainingHeight;
-
-  //                         // Add the content to the PDF page
-  //                         pdf.addImage(
-  //                             imgData,
-  //                             'JPEG',
-  //                             padding,
-  //                             yOffset,
-  //                             pdfWidth - 2 * padding,
-  //                             heightToAdd
-  //                         );
-
-  //                         remainingHeight -= pageHeightAvailable; // Reduce remaining height
-  //                         addPage = true; // Set true to add a new page for subsequent iterations
-  //                     }
-
-  //                     resolve();
-  //                 })
-  //                 .catch(reject);
-  //         });
-  //     };
-
-  //     // Initialize jsPDF
-  //     const pdf = new jsPDF('p', 'pt', [pdfWidth, pdfHeight]);
-
-  //     // Render the cover page
-  //     createCoverPage(coverElement, pdf)
-  //         .then(() => {
-  //             // Render the content starting from the next page
-  //             return createRestOfContentPage(contentElement, pdf, true).then(() => {
-  //                 return createRestOfContentPage(workSummaryContentElement, pdf, true);
-  //             });
-  //         })
-  //         .then(() => {
-  //             pdf.save(`Document-${new Date().toISOString()}.pdf`);
-  //         })
-  //         .catch((error) => {
-  //             console.error('Error generating PDF:', error);
-  //         });
-  // }
-
   onGenerateReport(): void {
+      const coverElement = document.getElementById('cover-section'); // Cover page element
+      const contentElement = document.getElementById('content-section-summary'); // Summary content page
+      const workSummaryContentElement = document.getElementById('content-section-work'); // Work summary page
+
+      const pdfWidth = 794; // A4 width in pixels
+      const pdfHeight = 1123; // A4 height in pixels
+      const margin = 15; // Margin for PDF content
+
+  	const createCoverPage = (
+          element: HTMLElement | null,
+          pdf: jsPDF,
+          addPage: boolean = false
+      ): Promise<void> => {
+          return new Promise((resolve, reject) => {
+              if (!element) return resolve(); // Skip if the element is null
+
+              html2canvas(element, {
+                  scale: 2,
+                  useCORS: true, // To load external fonts and images
+              })
+                  .then((canvas) => {
+                      const imgData = canvas.toDataURL('image/jpeg', 1.0);
+                      const canvasWidth = canvas.width;
+                      const canvasHeight = canvas.height;
+
+  					 // Scale to fit PDF page size
+  					 const scaleFactor = Math.min(
+  						pdfWidth / canvasWidth,
+  						pdfHeight / canvasHeight
+  					);
+
+  					const centeredX = (pdfWidth - canvasWidth * scaleFactor) / 2; // Horizontal centering
+                  	const centeredY = (pdfHeight - canvasHeight * scaleFactor) / 2; // Vertical centering
+
+  					pdf.addImage(
+  						imgData,
+  						'JPEG',
+  						centeredX,
+  						centeredY,
+  						canvasWidth * scaleFactor,
+  						canvasHeight * scaleFactor
+  					);
+
+                      resolve();
+                  })
+                  .catch(reject);
+          });
+      };
+
+      // Function to create a PDF page for a given element
+      const createRestOfContentPage = (
+          element: HTMLElement | null,
+          pdf: jsPDF,
+          addPage: boolean = false
+      ): Promise<void> => {
+          return new Promise((resolve, reject) => {
+              if (!element) return resolve(); // Skip if the element is null
+
+              html2canvas(element, {
+                  scale: 2,
+                  useCORS: true, // To load external fonts and images
+              })
+                  .then((canvas) => {
+                      const imgData = canvas.toDataURL('image/jpeg', 1.0);
+                      const canvasWidth = canvas.width;
+                      const canvasHeight = canvas.height;
+
+                      // Calculate scaling to fit PDF dimensions
+                      const scaleFactor = pdfWidth / canvasWidth;
+                      const scaledHeight = canvasHeight * scaleFactor;
+
+                      const padding = 24; // Padding in px
+                      const pageHeightAvailable = pdfHeight - 2 * padding; // Available height on each page (excluding padding)
+
+                      let yOffset = padding; // Initial Y offset for the first page
+
+                      // Split content into multiple pages if necessary
+                      let remainingHeight = scaledHeight;
+                      while (remainingHeight > 0) {
+                          if (addPage) pdf.addPage(); // Add a new page if needed
+
+                          const heightToAdd =
+                              remainingHeight > pageHeightAvailable
+                                  ? pageHeightAvailable
+                                  : remainingHeight;
+
+                          // Add the content to the PDF page
+                          pdf.addImage(
+                              imgData,
+                              'JPEG',
+                              padding,
+                              yOffset,
+                              pdfWidth - 2 * padding,
+                              heightToAdd
+                          );
+
+                          remainingHeight -= pageHeightAvailable; // Reduce remaining height
+                          addPage = true; // Set true to add a new page for subsequent iterations
+                      }
+
+                      resolve();
+                  })
+                  .catch(reject);
+          });
+      };
+
+      // Initialize jsPDF
+      const pdf = new jsPDF('p', 'pt', [pdfWidth, pdfHeight]);
+
+      // Render the cover page
+      createCoverPage(coverElement, pdf)
+          .then(() => {
+              // Render the content starting from the next page
+              return createRestOfContentPage(contentElement, pdf, true).then(() => {
+                  return createRestOfContentPage(workSummaryContentElement, pdf, true);
+              });
+          })
+          .then(() => {
+              pdf.save(`Document-${new Date().toISOString()}.pdf`);
+          })
+          .catch((error) => {
+              console.error('Error generating PDF:', error);
+          });
+  }
+
+  onGenerateReport1(): void {
     const coverElement = document.getElementById('cover-section');
     const contentElement = document.getElementById('content-section-summary');
     const workSummaryContentElement = document.getElementById(
       'content-section-work'
     );
 
-    const pdfWidth = 596; // A4 width in points
-    const pdfHeight = 842; // A4 height in points
-    const margin = 20; // Margin for PDF content
-    const padding = 24; // Padding for page content
+    const pdfWidth = 794; // A4 width in pixels
+    const pdfHeight = 1123; // A4 height in pixels
+    // const margin = 20; // Margin for PDF content
+    // const padding = 24; // Padding for page content
+    const margin = 0; // Margin for PDF content
+    const padding = 0; // Padding for page content
 
     // Helper function to render a single page
     const renderPage = (
@@ -549,12 +551,14 @@ export class AppComponent {
             // paragraphs[i].style.paddingBottom = '12px';
             paragraphs[i].style.padding = '12px';
           }
+
         }
 
         html2canvas(element, {
           scale: 2, // Higher scale for better quality
           useCORS: true, // Allow cross-origin resources
           allowTaint: true,
+          backgroundColor: '#000'
         })
           .then(async (canvas) => {
             const imgData = canvas.toDataURL('image/jpeg', 1.0);
@@ -609,16 +613,17 @@ export class AppComponent {
 
       try {
         // Render the cover page
-        await renderPage(coverElement, pdf, 1, margin, false);
+        await renderPage(coverElement, pdf, 1, padding, false);
 
         // Render the summary content
-        await renderPage(contentElement, pdf, 1, margin, true);
+        await renderPage(contentElement, pdf, 1, padding, true);
 
         // Render the work summary content
-        await renderPage(workSummaryContentElement, pdf, margin, margin, true);
+        await renderPage(workSummaryContentElement, pdf, 1, padding, true);
 
         // Save the PDF
         pdf.save(`Report-${new Date().toISOString()}.pdf`);
+
       } catch (error) {
         console.error('Error generating PDF:', error);
       }

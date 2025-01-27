@@ -1,100 +1,106 @@
-<div class="a4-page flex flex-col items-stretch justify-start bg-gray-100 p-[36px] gap-4">
+<div class="page-border a4-page flex flex-col justify-start py-[48px] gap-4">
 
-    <img src="images/watermark.jpg" height="100%" width="100%" class="bg-img" />
-    <div class="w-full" style="z-index: 10000;">
-        <div class="flex items-center justify-between">
+    <div class="background-container flex flex-col items-stretch justify-start gap-4 px-[48px] e-flex">
 
-            <div class="flex justify-start items-center w-full gap-4" style="flex: 1">
-                <!-- Logo Section -->
-                <div class="flex items-center gap-2">
-                    <img src="images/report.png" alt="ORKER Logo" class="h-12" />
-                </div>
-    
-                @if (summaryPage().main_header.client_logo_url) {
-                    <div class="border-l h-20 border-gray-300"></div>
-    
-                    <!-- Client Logo Section -->
-                    <div class="flex items-center">
-                        <img [src]="summaryPage().main_header.client_logo_url" alt="Client Logo" class="h-12 rounded-[8px]" />
+        <div class="w-full content-area">
+            <div class="flex items-center justify-between">
+
+                <div class="flex justify-start items-center w-full gap-4" style="flex: 1">
+                    <!-- Logo Section -->
+                    <div class="flex items-center gap-2">
+                        <img src="images/report.png" alt="ORKER Logo" class="h-16" />
                     </div>
-                }
-    
-            </div>
-
-            <!-- Right Section -->
-            <div class="text-right" style="flex: 1">
-                <h2 class="text-gray-700 text-[24px] font-extrabold">{{summaryPage().main_header.report_title}}</h2>
-                <p class="text-[14px] font-medium text-gray-500">{{summaryPage().main_header.report_subtitle}}</p>
-            </div>
-        </div>
-
-        <!-- Report Details -->
-         @if (summaryPage().project_banner) {
-            <div class="flex items-start gap-x-4 mt-4">
-                <div class="w-[100px] h-[77px] bg-gray-200 rounded-[12px] overflow-hidden">
-                    <!-- Placeholder for Image -->
-                    <img [src]="summaryPage().project_banner?.project_profile_url" [alt]="summaryPage().project_banner?.project_title" class="w-full h-full object-cover" />
-                </div>
-
-                <div>
-                    <span class="text-sm font-semibold text-gray-700">{{summaryPage().project_banner?.project_title}}</span>
-                    @if (summaryPage().project_banner?.project_details) {
-                        <p class="text-[11px] font-semibold text-gray-500">
-                            <span class="text-[11px] font-semibold">Architect :</span> {{summaryPage().project_banner?.project_details?.Architect}}
-                        </p>
-                        <p class="text-[11px] font-semibold text-gray-500">
-                            <span class="text-[11px] font-semibold">Start Date :</span> {{summaryPage().project_banner?.project_details?.['Start Date']}}
-                        </p>
-                        <p class="text-[11px] font-semibold text-gray-500">
-                            <span class="text-[11px] font-semibold">Est Duration :</span> {{summaryPage().project_banner?.project_details?.['Est Duration']}}
-                        </p>
+        
+                    @if (summaryPage().main_header.client_logo_url) {
+                        <div class="border-l h-20 border-gray-300"></div>
+        
+                        <!-- Client Logo Section -->
+                        <div class="flex items-center">
+                            <img [src]="summaryPage().main_header.client_logo_url" alt="Client Logo" class="h-16 rounded-[8px]" />
+                        </div>
                     }
+        
+                </div>
+
+                <!-- Right Section -->
+                <div class="text-right" style="flex: 1">
+                    <h2 class="text-[28px] font-extrabold text-[#00263A]">{{summaryPage().main_header.report_title}}</h2>
+                    <p class="text-[18px] font-medium text-[#00263A]">{{summaryPage().main_header.report_subtitle}}</p>
                 </div>
             </div>
-        }
-    </div>
 
-    @for (section of summaryPage().sections; track section.section_title) {
-        <h3 class="text-[14px] font-bold" style="z-index: 10000;">{{section.section_title}}</h3>
+            <!-- Report Details -->
+            @if (summaryPage().project_banner) {
+                <div class="flex items-start gap-x-4 mt-4">
+                    <div class="w-[170px] h-[120px] bg-gray-200 rounded-[12px] overflow-hidden">
+                        <!-- Placeholder for Image -->
+                        <img [src]="summaryPage().project_banner?.project_profile_url" [alt]="summaryPage().project_banner?.project_title" class="w-full h-full object-cover" />
+                    </div>
 
-        <!-- start note -->
-        @if (section.start_note) {
-            <p class="w-fit banner flex items-center e-flex" style="z-index: 10000;">Note: {{section.start_note}}</p>
-        }
-
-        <!-- middle sections -->
-        <div class="flex flex-wrap gap-[12px]" style="z-index: 10000;">
-            @for (sub_section of section?.subsections; track sub_section?.view) {
-                @if (sub_section?.view === "attendance_summary") {
-                    <app-attendance-summary 
-                        [class.e-flex]="!sub_section?.view_content?.attendance_summary[0]?.man_hours"
-                        [attendanceSummary]="sub_section?.view_content" />
-                }
-
-                @else if (sub_section?.view === "visitors_summary") {
-                    <app-visitor-summary 
-                        [title]="sub_section?.title"
-                        [visitorSummary]="sub_section?.view_content?.visitor_logs"/>
-                }
-
-                @else if (sub_section?.view === "deliveries_summary") {
-                    <app-delivery-summary 
-                        [title]="sub_section?.title"
-                        [deliverySummary]="sub_section?.view_content?.deliveries"/>
-                }
-
-                @else if (sub_section?.view === "materials_summary") {
-                    <app-material-summary 
-                        [title]="sub_section?.title"
-                        [materialSummary]="sub_section?.view_content?.materials"/>
-                }
+                    <div>
+                        <span class="text-[18px] font-semibold text-[#00263A]">{{summaryPage().project_banner?.project_title}}</span>
+                        @if (summaryPage().project_banner?.project_details) {
+                            <p class="text-[16px] font-semibold text-[#00263A]">
+                                <span class="text-[16px] font-semibold text-[#00263A]">Architect :</span> {{summaryPage().project_banner?.project_details?.Architect}}
+                            </p>
+                            <p class="text-[16px] font-semibold text-[#00263A]">
+                                <span class="text-[16px] font-semibold text-[#00263A]">Start Date :</span> {{summaryPage().project_banner?.project_details?.['Start Date']}}
+                            </p>
+                            <p class="text-[16px] font-semibold text-[#00263A]">
+                                <span class="text-[16px] font-semibold text-[#00263A]">Est Duration :</span> {{summaryPage().project_banner?.project_details?.['Est Duration']}}
+                            </p>
+                        }
+                    </div>
+                </div>
             }
         </div>
 
-        <!-- end note -->
-        @if (section.end_note) {
-            <div class="w-fit banner flex items-center e-flex" style="z-index: 10000;">Note: {{section.end_note}}</div>
+        @for (section of summaryPage().sections; track section.section_title) {
+            <h3 class="text-[20px] font-bold content-area text-[#00263A]">{{section.section_title}}</h3>
+
+            <!-- start note -->
+            @if (section.start_note) {
+                <p class="w-fit banner flex items-center content-area text-[#000000]">Note: {{section.start_note}}</p>
+            }
+
+            <!-- middle sections -->
+            <div class="flex flex-wrap gap-[16px] content-area">
+                @for (sub_section of section?.subsections; track sub_section?.view) {
+                    @if (sub_section?.view === "attendance_summary") {
+                        <app-attendance-summary 
+                            [ngClass]="sub_section?.view_content?.attendance_summary[0]?.man_hours ? 'w-[60%]' : 'e-flex'"
+                            [attendanceSummary]="sub_section?.view_content" />
+                    }
+
+                    @else if (sub_section?.view === "visitors_summary") {
+                        <app-visitor-summary 
+                            class="e-flex"
+                            [title]="sub_section?.title"
+                            [visitorSummary]="sub_section?.view_content?.visitor_logs"/>
+                    }
+
+                    @else if (sub_section?.view === "deliveries_summary") {
+                        <app-delivery-summary 
+                            class="e-flex"
+                            [title]="sub_section?.title"
+                            [deliverySummary]="sub_section?.view_content?.deliveries"/>
+                    }
+
+                    @else if (sub_section?.view === "materials_summary") {
+                        <app-material-summary 
+                            class="e-flex"
+                            [title]="sub_section?.title"
+                            [materialSummary]="sub_section?.view_content?.materials"/>
+                    }
+                }
+            </div>
+
+            <!-- end note -->
+            @if (section.end_note) {
+                <div class="w-fit banner flex items-center content-area text-[#000000]">Note: {{section.end_note}}</div>
+            }
+
         }
 
-    }
+    </div>
 </div>

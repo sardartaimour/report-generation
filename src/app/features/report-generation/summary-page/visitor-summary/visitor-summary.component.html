@@ -1,25 +1,25 @@
 <div class="container border border-gray-300 rounded-lg shadow-md min-w-[350px] p-[10px]">
-	<h3 class="text-[12px] font-semibold text-gray-800 mb-2">{{title()}}</h3>
+	<h3 class="text-[18px] font-semibold text-[#000000] mb-2">{{title()}}</h3>
 
 	<div>
 		<!-- Visitor Item 1 -->
 		@for (visitor of visitorSummary(); track visitor.visitor_name) {
 			<div class="flex justify-between items-center mb-2">
 				<div>
-					<p class="text-[10px] font-medium text-gray-800">
+					<p class="text-[16px] font-medium text-[#000000]">
 						{{visitor?.visitor_name}}
 						@if (visitor?.visitor_contact_number) {
-							<span class="text-[8px] text-gray- font-light">• {{visitor?.visitor_contact_number}}</span>
+							<span class="text-[14px] text-[#000000] font-light">• {{visitor?.visitor_contact_number}}</span>
 						}
 					</p>
 					
 					@if (visitor?.visit_context) {
-						<p class="text-[8px] text-gray- font-light">{{visitor?.visit_context}}</p>
+						<p class="text-[14px] text-[#000000] font-light">{{visitor?.visit_context}}</p>
 					}
 				</div>
 
 				<div class="flex">
-					<div class="bg-[#00476D1A] text-gray-700 text-[10px] font-semibold px-3 py-1 rounded-full">
+					<div class="bg-[#00476D1A] text-[#000000]700 text-[14px] font-semibold px-3 py-1 rounded-full">
 						{{visitor?.visited_dates}}
 					</div>
 				</div>
