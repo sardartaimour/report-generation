@@ -17,7 +17,17 @@
     border: 1px solid #00263A;
     padding: 4px 8px;
     font-weight: 500;
-    font-size: 17px;
+    font-size: 19px;
+    display: inline-block !important;
+    margin-bottom: 8px;
+}
+
+.detail-title {
+    text-align: left;
+    font-size: 18px;
+    font-weight: 400;
+    color: #00263A;
+    flex: 1;
 }
 
 @media (max-width: 768px) {

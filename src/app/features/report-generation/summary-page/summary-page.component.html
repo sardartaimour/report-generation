@@ -1,14 +1,15 @@
-<div class="page-border a4-page flex flex-col justify-start py-[48px] gap-4">
+<div class="a4-page flex flex-col justify-start py-[48px] gap-4">
+    
+    <div class="background-watermark"></div>
+    <div class="flex flex-col items-stretch justify-start gap-4 px-[48px] e-flex" style="z-index: 9999;">
 
-    <div class="background-container flex flex-col items-stretch justify-start gap-4 px-[48px] e-flex">
-
-        <div class="w-full content-area">
-            <div class="flex items-center justify-between">
+        <div class="w-full">
+            <div class="flex items-center justify-between mb-[3rem]">
 
                 <div class="flex justify-start items-center w-full gap-4" style="flex: 1">
                     <!-- Logo Section -->
                     <div class="flex items-center gap-2">
-                        <img src="images/report.png" alt="ORKER Logo" class="h-16" />
+                        <img src="images/report.png" alt="ORKER Logo" class="h-20" />
                     </div>
         
                     @if (summaryPage().main_header.client_logo_url) {
@@ -16,7 +17,7 @@
         
                         <!-- Client Logo Section -->
                         <div class="flex items-center">
-                            <img [src]="summaryPage().main_header.client_logo_url" alt="Client Logo" class="h-16 rounded-[8px]" />
+                            <img [src]="summaryPage().main_header.client_logo_url" alt="Client Logo" class="h-20 rounded-[8px] border-gray-300" />
                         </div>
                     }
         
@@ -24,31 +25,36 @@
 
                 <!-- Right Section -->
                 <div class="text-right" style="flex: 1">
-                    <h2 class="text-[28px] font-extrabold text-[#00263A]">{{summaryPage().main_header.report_title}}</h2>
-                    <p class="text-[18px] font-medium text-[#00263A]">{{summaryPage().main_header.report_subtitle}}</p>
+                    <h2 class="text-[34px] font-extrabold text-[#00263A]">{{summaryPage().main_header.report_title}}</h2>
+                    <p class="text-[19px] font-medium text-[#00263A]">{{summaryPage().main_header.report_subtitle}}</p>
                 </div>
             </div>
 
             <!-- Report Details -->
             @if (summaryPage().project_banner) {
-                <div class="flex items-start gap-x-4 mt-4">
-                    <div class="w-[170px] h-[120px] bg-gray-200 rounded-[12px] overflow-hidden">
+                <div class="flex items-start gap-x-8 mb-[3rem] mt-[1rem]">
+                    <div class="w-[250px] h-[170px] bg-gray-200 rounded-[12px] overflow-hidden">
                         <!-- Placeholder for Image -->
-                        <img [src]="summaryPage().project_banner?.project_profile_url" [alt]="summaryPage().project_banner?.project_title" class="w-full h-full object-cover" />
+                        <img [src]="summaryPage().project_banner?.project_profile_url" class="w-full h-full object-cover" />
                     </div>
 
-                    <div>
-                        <span class="text-[18px] font-semibold text-[#00263A]">{{summaryPage().project_banner?.project_title}}</span>
+                    <div class="w-[20%]">
+                        <span class="text-[22px] font-semibold text-[#00263A]">{{summaryPage().project_banner?.project_title}}</span>
                         @if (summaryPage().project_banner?.project_details) {
-                            <p class="text-[16px] font-semibold text-[#00263A]">
-                                <span class="text-[16px] font-semibold text-[#00263A]">Architect :</span> {{summaryPage().project_banner?.project_details?.Architect}}
-                            </p>
-                            <p class="text-[16px] font-semibold text-[#00263A]">
-                                <span class="text-[16px] font-semibold text-[#00263A]">Start Date :</span> {{summaryPage().project_banner?.project_details?.['Start Date']}}
-                            </p>
-                            <p class="text-[16px] font-semibold text-[#00263A]">
-                                <span class="text-[16px] font-semibold text-[#00263A]">Est Duration :</span> {{summaryPage().project_banner?.project_details?.['Est Duration']}}
-                            </p>
+                            <div class="flex justify-between mt-[1rem]">
+                                <p class="detail-title">Architect:</p>
+                                <p class="detail-title"> {{summaryPage().project_banner?.project_details?.Architect}}</p>
+                            </div>
+
+                            <div class="flex justify-between">
+                                <p class="detail-title">Start Date:</p>
+                                <p class="detail-title"> {{summaryPage().project_banner?.project_details?.['Start Date']}}</p>
+                            </div>
+
+                            <div class="flex justify-between">
+                                <p class="detail-title">Est Duration:</p>
+                                <p class="detail-title"> {{summaryPage().project_banner?.project_details?.['Est Duration']}}</p>
+                            </div>
                         }
                     </div>
                 </div>
@@ -56,15 +62,15 @@
         </div>
 
         @for (section of summaryPage().sections; track section.section_title) {
-            <h3 class="text-[20px] font-bold content-area text-[#00263A]">{{section.section_title}}</h3>
+            <h3 class="text-left text-[22px] font-bold text-[#00263A] mb-[.5rem] text-alignment-f">{{section.section_title}}</h3>
 
             <!-- start note -->
             @if (section.start_note) {
-                <p class="w-fit banner flex items-center content-area text-[#000000]">Note: {{section.start_note}}</p>
+                <p class="text-left w-fit banner flex items-center text-[#000000] text-alignment-f">Note: {{section.start_note}}</p>
             }
 
             <!-- middle sections -->
-            <div class="flex flex-wrap gap-[16px] content-area">
+            <div class="flex flex-wrap gap-[20px]">
                 @for (sub_section of section?.subsections; track sub_section?.view) {
                     @if (sub_section?.view === "attendance_summary") {
                         <app-attendance-summary 
@@ -92,12 +98,18 @@
                             [title]="sub_section?.title"
                             [materialSummary]="sub_section?.view_content?.materials"/>
                     }
+
+                    @else if (sub_section?.view === "work_progress_summary") {
+                        <app-work-progress-summary 
+                            class="e-flex"
+                            [workProgressSummary]="sub_section?.view_content?.works"/>
+                    }
                 }
             </div>
 
             <!-- end note -->
             @if (section.end_note) {
-                <div class="w-fit banner flex items-center content-area text-[#000000]">Note: {{section.end_note}}</div>
+                <div class="text-left w-fit banner flex items-center text-[#000000] text-alignment-f">Note: {{section.end_note}}</div>
             }
 
         }

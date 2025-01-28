@@ -1,20 +1,20 @@
-<div class="container border border-gray-300 rounded-lg shadow-md min-w-[350px] p-[10px]">
-	<h3 class="text-[18px] font-semibold text-[#000000] mb-2">{{title()}}</h3>
+<div class="container border border-gray-300 rounded-lg shadow-md min-w-[350px] p-[10px] mb-[8px]">
+	<h3 class="text-[21px] font-semibold text-[#000000] mb-2 text-left  text-alignment-f">{{title()}}</h3>
 
 	<div>
 		<!-- Visitor Item 1 -->
 		@for (summary of deliverySummary(); track summary.summary_name) {
-			<div class="flex justify-between items-center mb-2">
-				<div>
-					<p class="text-[16px] font-medium text-[#000000]">
+			<div class="flex justify-between items-center mb-4">
+				<div class=" text-alignment-f flex-wrap">
+					<p class="w-full text-[18px] font-medium text-[#000000] text-left">
 						{{summary?.delivery_name}}
 					</p>
 					
-					<p class="text-[14px]text-[#000000] font-light">{{summary?.delivery_date}}</p>
+					<p class="w-full text-[15px]text-[#000000] font-light text-left">{{summary?.delivery_date}}</p>
 				</div>
 
-				<div class="flex">
-					<div class="bg-[#00476D1A] text-[#000000] text-[14px] font-semibold px-3 py-1 rounded-full"
+				<div class="flex text-alignment-f">
+					<div class="text-center bg-[#00476D1A] text-[#000000] text-[16px] font-semibold px-3 py-1 rounded-full"
                         [class.bg-[#FF7B0080]]="summary?.color_theme === 'Warning'"
                         [class.bg-[#E1080859]]="summary?.color_theme === 'Critical'">
 						{{summary?.delivery_status}}

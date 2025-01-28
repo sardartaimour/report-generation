@@ -1,6 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
 @tailwind base;
+
+@layer base {
+    img {
+        @apply inline-block;
+    }
+}
+
 @tailwind components;
 @tailwind utilities;
 
@@ -48,7 +55,7 @@ body {
 .a4-page {
     position: relative;
     // width: 210mm; /* A4 width in mm */
-    min-height: 527mm; /* A4 height in mm */
+    // min-height: 527mm; /* A4 height in mm */
     // margin: 0 auto;
     background: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -80,13 +87,21 @@ body {
     background-color: #00476D33;
 }
 
-.content-area {
-    z-index: 99999;
+.background-watermark {
+    position: absolute;
+    top: 50%; /* Start at the vertical center */
+    right: 0; /* Align to the right edge */
+    transform: translateY(-50%); /* Center vertically */
+    width: 430px; /* Control width */
+    height: 1000px; /* Control height */
+    background-image: url('/images/watermark.png'); /* Path to your image */
+    background-size: contain; /* Ensure the image fits within the div */
+    background-repeat: no-repeat;
+    opacity: 0.5;
 }
 
-.background-container {
-    background-image: url('/images/watermark.png'); /* Path to your image */
-    background-size: contain; /* Scale the image to cover the container */
-    background-position: right; /* Center the image */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-  }
+.text-alignment-f {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}

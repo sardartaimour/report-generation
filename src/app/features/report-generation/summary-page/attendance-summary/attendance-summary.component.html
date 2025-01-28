@@ -1,16 +1,16 @@
-<div class="container border border-gray-300 rounded-lg shadow-md" [class.min-w-[500px]]="showManHours()">
+<div class="container border border-gray-300 rounded-lg shadow-md mb-[8px]" [class.min-w-[500px]]="showManHours()">
     <div class="flex justify-between items-center rounded-t-[20px]">
-        <div class="px-[12px] py-[4px] border-r-[2px] border-white-600 e-flex">
-            <h3 class="text-[17px] font-light text-[#000000]">Service Provider</h3>
+        <div class="px-[12px] py-[4px] border-r-[2px] e-flex bg-[#00263A1A] text-alignment-f" style="border-top-left-radius: 20px; border-color: white;">
+            <h3 class="text-left text-[18px] font-light text-[#000000] w-full">Service Provider</h3>
         </div>
 
-        <div class="px-[12px] py-[4px] e-flex">
-            <h3 class="text-[17px] font-light text-[#000000]">Active Days</h3>
+        <div class="px-[12px] py-[4px] e-flex bg-[#00263A1A] text-alignment-f">
+            <h3 class="text-center text-[18px] font-light text-[#000000 w-full">Active Days</h3>
         </div>
 
         @if (showManHours()) {
-            <div class="px-[12px] py-[4px] border-l-[2px] border-white-600 e-flex">
-                <h3 class="text-[17px] font-light text-[#000000]">Man Hours</h3>
+            <div class="px-[12px] py-[4px] border-l-[2px] e-flex bg-[#00263A1A] text-alignment-f" style="border-top-right-radius: 20px; border-color: white;">
+                <h3 class="text-center text-[18px] font-light text-[#000000] w-full">Man Hours</h3>
             </div>
         }
         
@@ -20,37 +20,42 @@
     <div class="p-[2px]">
         <!-- Item 1 -->
        @for (summary of attendanceSummary()?.attendance_summary; track summary?.contract_name) {
-        <div class="flex items-center px-[4px] py-[2px] rounded-[60px]" [class.bg-red-50]="summary?.color_theme === 'critical'">
-            
-            @if(summary?.service_provider_profile_url) {
-                <img [src]="summary?.service_provider_profile_url" [alt]="summary?.service_provider_name" class="w-[50px] h-[50px] rounded-full object-cover" />
-            } @else if (summary?.service_provider_name) {
-                <div class="w-[50px] h-[50px] rounded-full bg-gray-200 flex items-center justify-center text-[#000000] text-sm">
-                    {{summary?.service_provider_name.charAt(0)}}
-                </div>
-            }
+        <div class="flex items-center px-[4px] py-[2px] rounded-[60px] mb-4" [class.bg-red-50]="summary?.color_theme === 'critical'">
 
-            <div class="flex-1 ml-4">
-                @if (summary?.service_provider_name) {
-                    <p class="text-[18px] font-semibold text-[#000000]">{{summary?.service_provider_name}}</p>
+            <div class="e-flex flex">
+                @if(summary?.service_provider_profile_url) {
+                    <img [src]="summary?.service_provider_profile_url" class="w-[55px] h-[55px] rounded-full object-cover" />
+                } @else {
+                    <div class="text-center w-[55px] h-[55px] rounded-full bg-gray-200 flex items-center justify-center text-[#000000] text-sm">
+                        {{summary?.service_provider_name ? summary?.service_provider_name.charAt(0) : ''}}
+                    </div>
                 }
-                <p class="text-[14px] font-normal underline text-[#000000]">{{summary?.contract_name}}</p>
+
+                <div class="flex-1 ml-4  text-alignment-f flex-wrap">
+                    @if (summary?.service_provider_name) {
+                        <p class="text-left text-[20px] font-semibold text-[#000000] w-full">{{summary?.service_provider_name}}</p>
+                    }
+                    <p class="text-left text-[17px] font-normal underline text-[#000000] w-full">{{summary?.contract_name}}</p>
+                </div>
             </div>
 
-            <div class="e-flex">
-                <p class="text-[24px] font-extrabold text-[#000000]">{{summary?.active_days_count}}</p>
-                <p class="text-[13px] font-semibold text-[#000000]">out of {{attendanceSummary()?.total_days_count}}</p>
+            <div class="e-flex  text-alignment-f">
+                <p class="w-full text-center text-[30px] font-extrabold text-[#000000]">
+                    {{summary?.active_days_count}}
+                    <span class="text-left text-[14px] font-semibold text-[#000000]">out of {{attendanceSummary()?.total_days_count}}</span>
+                </p>
+                
             </div>
 
             @if (summary?.man_hours) {
-                <div class="text-[#444444] e-flex">
-                    <p class="text-[26px] font-extrabold">
+                <div class="text-[#444444] e-flex  text-alignment-f">
+                    <p class="w-full text-[30px] font-extrabold text-center">
                         {{summary?.man_hours}} 
                         @if(summary?.man_hours > 0) {
-                            +
+                            <span class="text-left text-[30px] font-extrabold ml-[-.5rem]">+</span>
                         }
                         @if (summary?.worked_overtime) {
-                            <sub class="text-[13px] font-semibold text-[#444444]">OT</sub>
+                            <span class="text-left text-[14px] font-semibold text-[#444444] ml-[4px]">OT</span>
                         }
                     </p>
                 </div>
